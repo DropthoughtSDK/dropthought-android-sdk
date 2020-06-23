@@ -82,7 +82,7 @@ public class MainApplication extends Application {
 }
 ```
 
-However, if you don't have a specific survey id for your app (you could have multiple surveys for your app), it is OK to initialize Dropthought without the survey id, for example:
+If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
 
 
 ```diff
