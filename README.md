@@ -74,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
+
+        // Remember: you must supply the activity (e.g. this)
 +       Dropthought.init(
-+               getApplication(),
++               this,
 +               DT_ACCOUNT_API_KEY,
 +               DT_SURVEY_ID
         );
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate();
         setContentView(R.layout.activity_main);
 +       Dropthought.init(
-+               getApplication(),
++               this,
 +               DT_ACCOUNT_API_KEY
         );
     }
