@@ -44,7 +44,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 +   implementation "com.dropthought.app:dt-sdk:+"
-+   // or, if your want to specify version
++   // or, if your want to specify the version
 +   // implementation "com.dropthought.app:dt-sdk:1.0.0"
 }
 ```
@@ -116,8 +116,9 @@ public class MainApplication extends Application {
 
 ### 3. Open Dropthought Survey for getting feedback
 
- - call `Dropthought.startSurveyActivity(Activity activity)` to open the survey that you specified during `Dropthought.init(Application app, String apiKey, String surveyId)`.
- - call `Dropthought.startSurveyActivity(Activity activity, String surveyId)` to open the survey with this specific id.
+You can either:
+ - use `Dropthought.startSurveyActivity(Activity activity)` to open the survey that you specified during `Dropthought.init(Application app, String apiKey, String surveyId)`.
+ - or, use `Dropthought.startSurveyActivity(Activity activity, String surveyId)` to open the survey with a different survey id.
 
 For example, a button that when users click on, opens the survey,
 
@@ -152,7 +153,12 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-### 3. Open Dropthought Survey for getting feedback
+### Additional feature: offline mode
+
+When user finishes a survey under no network or a bad network, the survey result is saved offline. Every time when `Dropthought.init` is called, Dropthought SDK would try to upload the saved results(if any) again once.
+
+Or, you could call `Dropthought.uploadOfflineFeedbacks()` manually to try to upload the saved results once if your app has network status monitor.
+
 
 ## FAQ
 
