@@ -58,23 +58,24 @@ Please make sure that your setup internet permission `android.permission.INTERNE
 
 ### 2. Dropthought SDK initialization
 
-calling `Dropthought.init()` inside your `onCreated` method of `MainApplication.java` to initialize Dropthought, for example:
+calling `Dropthought.init()` inside your `onCreate` method of `MainActivity.java` to initialize Dropthought, for example:
 
 ```diff
 package com.dropthought.sdk.sampleapp;
 
-import android.app.Application;
+import androidx.appcompat.app.AppCompatActivity;
 +import com.dropthought.app.sdk.Dropthought;
 
-public class MainApplication extends Application {
+public class MainActivity extends AppCompatActivity {
 +   public static final String DT_ACCOUNT_API_KEY = "your-api-key";
 +   public static final String DT_SURVEY_ID = "your survey's id";
 
     @Override
     public void onCreate() {
         super.onCreate();
+        setContentView(R.layout.activity_main);
 +       Dropthought.init(
-+               this,
++               getApplication(),
 +               DT_ACCOUNT_API_KEY,
 +               DT_SURVEY_ID
         );
@@ -88,18 +89,19 @@ If you have multiple surveys in your app, it is OK to initialize Dropthought wit
 ```diff
 package com.dropthought.sdk.sampleapp;
 
-import android.app.Application;
+import androidx.appcompat.app.AppCompatActivity;
 +import com.dropthought.app.sdk.Dropthought;
 
-public class MainApplication extends Application {
+public class MainActivity extends AppCompatActivity {
 +   public static final String DT_ACCOUNT_API_KEY = "your-api-key";
 
     @Override
     public void onCreate() {
         super.onCreate();
+        setContentView(R.layout.activity_main);
 +       Dropthought.init(
-+               this,
-+               DT_ACCOUNT_API_KEY,
++               getApplication(),
++               DT_ACCOUNT_API_KEY
         );
     }
 }
@@ -116,14 +118,14 @@ You can either:
 For example, a button that when users click on, opens the survey,
 
 ```diff
-+import com.dropthought.app.sdk.Dropthought;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Dropthought.init(...)
 
         Button button = findViewById(R.id.btn_open_survey);
         button.setOnClickListener(new View.OnClickListener() {
