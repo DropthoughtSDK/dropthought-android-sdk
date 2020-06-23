@@ -10,18 +10,13 @@
 
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
-**Contact Customer Support at cs@dropthought.com to get help on how to get the accessKey and secretKey.**
 
 ```diff
 allprojects {
     repositories {
 +       maven {
-+           // Dropthought's maven repo, the key has only read access to this url
-+           url("s3://maven-repo.demo.dropthought.com/releases")
-+           credentials(AwsCredentials) {
-+               accessKey "paste the access key here"
-+               secretKey "paste the secret key here"
-+           }
++           // Dropthought's maven repo
++           url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
 +       }
         google()
         jcenter()
@@ -43,9 +38,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-+   implementation "com.dropthought.app:dt-sdk:+"
-+   // or, if your want to specify the version
-+   // implementation "com.dropthought.app:dt-sdk:1.0.0"
++   implementation "com.dropthought.app:dt-sdk:1.0.0"
 }
 ```
 

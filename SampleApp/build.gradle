@@ -19,12 +19,8 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            // Dropthought's maven repo, the key has only read access to this url
-            url("s3://maven-repo.demo.dropthought.com/releases")
-            credentials(AwsCredentials) {
-                accessKey "paste the access key here"
-                secretKey "paste the access key here"
-            }
+            // Dropthought's maven repo
+            url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
         }
         google()
         jcenter()
