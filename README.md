@@ -10,6 +10,8 @@
 
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
+**Contact Customer Support at cs@dropthought.com to get help on how to get the accessKey and secretKey.**
+
 ```diff
 allprojects {
     repositories {
@@ -17,8 +19,8 @@ allprojects {
 +           // Dropthought's maven repo, the key has only read access to this url
 +           url("s3://maven-repo.demo.dropthought.com/releases")
 +           credentials(AwsCredentials) {
-+               accessKey "AKIAZ7THEM2LARDBXYVS"
-+               secretKey "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"
++               accessKey "paste the access key here"
++               secretKey "paste the secret key here"
 +           }
 +       }
         google()
@@ -149,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
     /*...*/
 }
 ```
+
+### 3. Open Dropthought Survey for getting feedback
 
 ## FAQ
 

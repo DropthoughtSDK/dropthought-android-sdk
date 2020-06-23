@@ -1,15 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
-        
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,13 +22,13 @@ allprojects {
             // Dropthought's maven repo, the key has only read access to this url
             url("s3://maven-repo.demo.dropthought.com/releases")
             credentials(AwsCredentials) {
-                accessKey "AKIAZ7THEM2LARDBXYVS"
-                secretKey "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"
+                accessKey "paste the access key here"
+                secretKey "paste the access key here"
             }
         }
         google()
         jcenter()
-        
+
     }
 }
 
