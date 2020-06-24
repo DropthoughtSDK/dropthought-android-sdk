@@ -1,6 +1,7 @@
 # Dropthought SDK for Android
 
- (...description...)
+testing...
+
 
 ## Integrate Dropthought SDK to your project
 
