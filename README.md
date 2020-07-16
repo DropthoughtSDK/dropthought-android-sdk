@@ -11,14 +11,15 @@
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
 
-```diff
+```gradle
 allprojects {
     repositories {
-+       // add this maven repo
-        maven {
-            // Dropthought's maven repo
+        // Dropthought's maven repo
+        maven {            
             url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
         }
+        
+        // ...
         google()
         jcenter()
 
@@ -29,7 +30,7 @@ allprojects {
 
 open your module's `build.gradle` file, add dropthought sdk dependency:
 
-```diff
+```gradle
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -39,7 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-+   // add dropthought sdk dependency
+    // add dropthought sdk dependency
     implementation "com.dropthought.app:dt-sdk:1.0.0"
 }
 ```
@@ -48,12 +49,12 @@ dependencies {
 
 Please make sure that your setup internet permission `android.permission.INTERNET` in your `AndroidManifest.xml`
 
-```diff
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dropthought.sdk.sampleapp">
 
-+   <!-- make sure you have Internet permission  -->  
+    <!-- make sure you have Internet permission  -->  
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
@@ -63,11 +64,12 @@ Please make sure that your setup internet permission `android.permission.INTERNE
 
 calling `Dropthought.init()` inside your `onCreate` method of `MainActivity.java` to initialize Dropthought, for example:
 
-```diff
+```java
 package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-+// import dropthought
+
+// import dropthought package
 import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate();
         setContentView(R.layout.activity_main);
 
-+       // Remember: you must supply the activity (e.g. this)
+        // Remember: you must supply the activity (e.g. this)
         Dropthought.init(
                 this,
                 DT_ACCOUNT_API_KEY,
@@ -92,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
 If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
 
 
-```diff
+```java
 package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-+// import dropthought
+// import dropthought package
 import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
@@ -124,7 +126,7 @@ You can either:
 
 For example, a button that when users click on, opens the survey,
 
-```diff
+```java
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -145,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
    
     public void takeSurvey() {
-+       // This is how you display a survey for the user to take
-+       // Remember: you must supply the activity (e.g. this)
+        // This is how you display a survey for the user to take
+        // Remember: you must supply the activity (e.g. this)
         Dropthought.startSurveyActivity(
                 this
         );
