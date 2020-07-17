@@ -11,7 +11,7 @@
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
 
-```gradle
+```diff
 allprojects {
     repositories {
 +       // Add Dropthought's maven repo 
@@ -32,7 +32,7 @@ allprojects {
 
 open your module's `build.gradle` file, add dropthought sdk dependency:
 
-```gradle
+```diff
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -51,13 +51,13 @@ dependencies {
 
 Please make sure that your setup internet permission `android.permission.INTERNET` in your `AndroidManifest.xml`
 
-```xml
+```diff
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dropthought.sdk.sampleapp">
 
-    <!-- make sure you have Internet permission  -->  
-    <uses-permission android:name="android.permission.INTERNET" />
++   <!-- make sure you have Internet permission  -->  
++   <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
 ```
@@ -66,13 +66,13 @@ Please make sure that your setup internet permission `android.permission.INTERNE
 
 calling `Dropthought.init()` inside your `onCreate` method of `MainActivity.java` to initialize Dropthought, for example:
 
-```java
+```diff
 package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// import dropthought package
-import com.dropthought.app.sdk.Dropthought;
++// import dropthought package
++import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
@@ -82,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
-
-        // Remember: you must supply the activity (e.g. this)
+        
++       // call Dropthought.init(Activity, API_KEY, SURVEY_ID) inside onCreate method
++       // Remember: you must supply the activity (e.g. this)
         Dropthought.init(
                 this,
                 DT_ACCOUNT_API_KEY,
@@ -96,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
 If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
 
 
-```java
+```diff
 package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-// import dropthought package
-import com.dropthought.app.sdk.Dropthought;
++// import dropthought package
++import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
@@ -110,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
+        
++       // call Dropthought.init(Activity, API_KEY) inside onCreate method
++       // Remember: you must supply the activity (e.g. this)        
         Dropthought.init(
                 this,
                 DT_ACCOUNT_API_KEY
@@ -128,7 +132,7 @@ You can either:
 
 For example, a button that when users click on, opens the survey,
 
-```java
+```diff
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -147,10 +151,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-   
+      
     public void takeSurvey() {
-        // This is how you display a survey for the user to take
-        // Remember: you must supply the activity (e.g. this)
++       // This is how you display a survey for the user to take
++       // Remember: you must supply the activity (e.g. this)
         Dropthought.startSurveyActivity(
                 this
         );
