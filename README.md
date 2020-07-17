@@ -14,7 +14,8 @@ open the project's `build.gradle` file, add Dropthought's maven repo under `allp
 ```gradle
 allprojects {
     repositories {
-        // Dropthought's maven repo
++       // Add Dropthought's maven repo 
++       // to repositories
         maven {            
             url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
         }
@@ -26,6 +27,7 @@ allprojects {
     }
 }
 ```
+
 #### add dependency
 
 open your module's `build.gradle` file, add dropthought sdk dependency:
@@ -40,8 +42,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:1.0.0"
++   // add dropthought sdk dependency
++   implementation "com.dropthought.app:dt-sdk:1.0.0"
 }
 ```
 
