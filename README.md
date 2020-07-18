@@ -10,13 +10,14 @@
 
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
+https://github.com/DropthoughtSDK/dropthought-android-sdk/blob/87e3e1d1c524552cc7d1639a1989b5d623eebdd9/SampleApp/build.gradle#L21-L23
 
 ```diff
 allprojects {
     repositories {
 +       // Add Dropthought's maven repo 
 +       // to repositories
-        maven {            
+        maven {           
             url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
         }
         
