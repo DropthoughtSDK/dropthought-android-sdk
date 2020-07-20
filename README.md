@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 +   // add dropthought sdk dependency
-+   implementation "com.dropthought.app:dt-sdk:1.0.0"
+    implementation "com.dropthought.app:dt-sdk:1.0.0"
 }
 ```
 
@@ -57,7 +57,7 @@ Please make sure that your setup internet permission `android.permission.INTERNE
     package="com.dropthought.sdk.sampleapp">
 
 +   <!-- make sure you have Internet permission  -->  
-+   <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
 ```
@@ -72,7 +72,7 @@ package com.dropthought.sdk.sampleapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 +// import dropthought package
-+import com.dropthought.app.sdk.Dropthought;
+import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
@@ -102,7 +102,7 @@ package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 +// import dropthought package
-+import com.dropthought.app.sdk.Dropthought;
+import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
