@@ -14,12 +14,12 @@ open the project's `build.gradle` file, add Dropthought's maven repo under `allp
 ```diff
 allprojects {
     repositories {
-+       // Add Dropthought's maven repo 
++       // Add Dropthought's maven repo
 +       // to repositories
-        maven {            
+        maven {
             url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
         }
-        
+
         // ...
         google()
         jcenter()
@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 +   // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:1.0.0"
+    implementation "com.dropthought.app:dt-sdk:1.0.2"
 }
 ```
 
@@ -56,7 +56,7 @@ Please make sure that your setup internet permission `android.permission.INTERNE
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dropthought.sdk.sampleapp">
 
-+   <!-- make sure you have Internet permission  -->  
++   <!-- make sure you have Internet permission  -->
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
-        
+
 +       // call Dropthought.init(Activity, API_KEY, SURVEY_ID) inside onCreate method
 +       // Remember: you must supply the activity (e.g. this)
         Dropthought.init(
@@ -111,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
-        
+
 +       // call Dropthought.init(Activity, API_KEY) inside onCreate method
-+       // Remember: you must supply the activity (e.g. this)        
++       // Remember: you must supply the activity (e.g. this)
         Dropthought.init(
                 this,
                 DT_ACCOUNT_API_KEY
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-      
+
     public void takeSurvey() {
 +       // This is how you display a survey for the user to take
 +       // Remember: you must supply the activity (e.g. this)
