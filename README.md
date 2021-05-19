@@ -17,7 +17,7 @@ allprojects {
 +       // Add Dropthought's maven repo
 +       // to repositories
         maven {
-            url "https://dt-maven-demo.s3-us-west-2.amazonaws.com/releases"
+            url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
         }
 
         // ...
@@ -44,6 +44,21 @@ dependencies {
 
 +   // add dropthought sdk dependency
     implementation "com.dropthought.app:dt-sdk:1.1.8"
+}
+```
+
+#### set multiDexEnabled to true
+
+open your module's `build.gradle` file, set multiDexEnabled to true
+
+```diff
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        //...
++       multiDexEnabled true
+    }
 }
 ```
 
