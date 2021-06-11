@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 +   // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:1.1.8"
+    implementation "com.dropthought.app:dt-sdk:2.0.0"
 }
 ```
 
