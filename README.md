@@ -1,6 +1,6 @@
 # Dropthought SDK for Android
 
- (...description...)
+This repository contains all Dropthought android SDK sources.
 
 ## Integrate Dropthought SDK to your project
 
@@ -9,7 +9,6 @@
 #### add repository
 
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
-
 
 ```diff
 allprojects {
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
 If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
 
-
 ```diff
 package com.dropthought.sdk.sampleapp;
 
@@ -142,8 +140,9 @@ public class MainActivity extends AppCompatActivity {
 ### 3. Open Dropthought Survey for getting feedback
 
 You can either:
- - use `Dropthought.startSurveyActivity(Activity activity)` to open the survey that you specified during `Dropthought.init(Application app, String apiKey, String surveyId)`.
- - or, use `Dropthought.startSurveyActivity(Activity activity, String surveyId)` to open the survey with a different survey id.
+
+-   use `Dropthought.startSurveyActivity(Activity activity)` to open the survey that you specified during `Dropthought.init(Application app, String apiKey, String surveyId)`.
+-   or, use `Dropthought.startSurveyActivity(Activity activity, String surveyId)` to open the survey with a different survey id.
 
 For example, a button that when users click on, opens the survey,
 
@@ -179,12 +178,17 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
+### Additional feature: style
+
+-   set survey theme: `Dropthought.setTheme("default" | "light" | "dark")`
+-   set survey font color: `Dropthought.setFontColor()`
+-   set survey background color: `Dropthought.setBackgroundColor()`
+
 ### Additional feature: offline mode
 
 When user finishes a survey under no network or a bad network, the survey result is saved offline. Every time when `Dropthought.init` is called, Dropthought SDK would try to upload the saved results(if any) again once.
 
 Or, you could call `Dropthought.uploadOfflineFeedbacks()` manually to try to upload the saved results once if your app has network status monitor.
-
 
 ## FAQ
 
