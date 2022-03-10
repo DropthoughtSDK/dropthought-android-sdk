@@ -8,7 +8,26 @@ This repository contains all Dropthought android SDK sources.
 
 #### add repository
 
+open the project's `settings.gradle` file, add Dropthought's maven repo under `dependencyResolutionManagement > repositories`
+
+
+
+```diff
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
++       maven {
++           url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
++       }
+        google()
+        mavenCentral()
+    }
+}
+```
+
+##### for older project 
 open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
+
 
 ```diff
 allprojects {
