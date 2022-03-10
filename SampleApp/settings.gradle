@@ -1,2 +1,25 @@
-rootProject.name='SampleApp'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven {
+            url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
+        }
+        google()
+        mavenCentral {
+            // We don't want to fetch react-native from Maven Central as there are
+            // older versions over there.
+            content {
+                excludeGroup "com.facebook.react"
+            }
+        }
+    }
+}
+rootProject.name = "SampleApp"
 include ':app'

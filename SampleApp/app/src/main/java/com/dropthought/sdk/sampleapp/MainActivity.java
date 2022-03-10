@@ -10,7 +10,7 @@ import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "paste your api key here";
-    public static final String DT_ACCOUNT_SURVEY_ID = "paste your survey id here";
+    public static final String DT_SURVEY_ID = "paste your survey id here";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Dropthought.init(
                 this,
                 DT_ACCOUNT_API_KEY,
-                DT_ACCOUNT_SURVEY_ID
+                DT_SURVEY_ID
         );
 
         Button button = findViewById(R.id.btn_open_survey);

@@ -1,31 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-buildscript {
-
-    repositories {
-        google()
-        jcenter()
-
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
-
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        maven {
-            // Dropthought's maven repo
-            url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
-        }
-        google()
-        jcenter()
-
-    }
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
 }
 
 task clean(type: Delete) {
