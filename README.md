@@ -8,64 +8,28 @@ This repository contains all Dropthought android SDK sources.
 
 #### add repository
 
-open the project's `settings.gradle` file, add Dropthought's maven repo under `dependencyResolutionManagement > repositories`
-
- - add dropthought's maven repo: `https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases` 
- - prevent fetching the old version of react-native in mavenCentral
-
+open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
 
 ```diff
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+allprojects {
     repositories {
 +       // Add Dropthought's maven repo
 +       // to repositories
         maven {
             url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
         }
+
+        // ...
         google()
-        
-+       // prevent from fetching the old version of react-native
-        mavenCentral{
-            // We don't want to fetch react-native from Maven Central as there are
-            // older versions over there.
-            content {
-                excludeGroup "com.facebook.react"
-            }
-        }
+        jcenter()
+
     }
 }
 ```
 
-<details>
-  <summary>(only for older project) </summary>
-  
-  open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
-
-
-  ```diff
-  allprojects {
-      repositories {
-  +       // Add Dropthought's maven repo
-  +       // to repositories
-          maven {
-              url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
-          }
-
-          // ...
-          google()
-          jcenter()
-      }
-  }
-  ```
-</details>
-
-
 #### add dependency
 
-open your module's `build.gradle` file, 
- - add dropthought sdk dependency: `implementation "com.dropthought.app:dt-sdk:3.0.0"` 
- - add dependency `implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"`
+open your module's `build.gradle` file, add dropthought sdk dependency:
 
 ```diff
 dependencies {
@@ -77,11 +41,23 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-+   // add swiperefreshlayout dependency
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
 +   // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:3.0.0"
+    implementation "com.dropthought.app:dt-sdk:4.1.1"
+}
+```
+
+#### set multiDexEnabled to true
+
+open your module's `build.gradle` file, set multiDexEnabled to true
+
+```diff
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        //...
++       multiDexEnabled true
+    }
 }
 ```
 
@@ -113,7 +89,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
-+   // setup your apikey and survey id
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
     public static final String DT_SURVEY_ID = "your survey's id";
 
@@ -208,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 -   set survey theme: `Dropthought.setTheme("default" | "light" | "dark")`
 -   set survey font color: `Dropthought.setFontColor()`
 -   set survey background color: `Dropthought.setBackgroundColor()`
+-   set survey metadata: `Dropthought.setSurveyMetadata()`
 
 ### Additional feature: offline mode
 
