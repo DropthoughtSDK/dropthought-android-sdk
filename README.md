@@ -178,6 +178,15 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
+Set metadata example
+```
+    Bundle metadata = new Bundle();
+    metadata.putString("name", "User's name");
+    metadata.putString("age", "35");
+    metadata.putString("from", "Android");
+    Dropthought.setSurveyMetadata(metadata);
+```
+
 ### Additional feature: style
 
 -   set survey theme: `Dropthought.setTheme("default" | "light" | "dark")`
