@@ -167,6 +167,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void takeSurvey() {
+        // You can set metadata before start survey
+        Bundle metadata = new Bundle();
+        metadata.putString("name", "User's name");
+        metadata.putString("age", "35");
+        metadata.putString("from", "Android");
+        Dropthought.setSurveyMetadata(metadata);
+    
 +       // This is how you display a survey for the user to take
 +       // Remember: you must supply the activity (e.g. this)
         Dropthought.startSurveyActivity(
@@ -176,15 +183,6 @@ public class MainActivity extends AppCompatActivity {
 
     /*...*/
 }
-```
-
-Set metadata example
-```
-    Bundle metadata = new Bundle();
-    metadata.putString("name", "User's name");
-    metadata.putString("age", "35");
-    metadata.putString("from", "Android");
-    Dropthought.setSurveyMetadata(metadata);
 ```
 
 ### Additional feature: style
