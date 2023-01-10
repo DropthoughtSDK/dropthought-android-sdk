@@ -2,6 +2,16 @@
 
 This repository contains all Dropthought android SDK sources.
 
+### Before integrate Dropthought SDK
+
+First, You need to enable to SDK Control Center on Dropthought Enterprise App.
+
+Second, create an application and a visibility. You can assign a program or change style for this visibility. 
+
+Third, copy the visibility ID for SDK integration.
+
+Now you can start to integrate Dropthought SDK
+
 ## Integrate Dropthought SDK to your project
 
 ### 1. Project setup
@@ -42,7 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 +   // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:4.1.1"
+    implementation "com.dropthought.app:dt-sdk:4.2.0"
 }
 ```
 
@@ -90,35 +100,6 @@ import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DT_ACCOUNT_API_KEY = "your-api-key";
-    public static final String DT_SURVEY_ID = "your survey's id";
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        setContentView(R.layout.activity_main);
-
-+       // call Dropthought.init(Activity, API_KEY, SURVEY_ID) inside onCreate method
-+       // Remember: you must supply the activity (e.g. this)
-        Dropthought.init(
-                this,
-                DT_ACCOUNT_API_KEY,
-                DT_SURVEY_ID
-        );
-    }
-}
-```
-
-If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
-
-```diff
-package com.dropthought.sdk.sampleapp;
-
-import androidx.appcompat.app.AppCompatActivity;
-+// import dropthought package
-import com.dropthought.app.sdk.Dropthought;
-
-public class MainActivity extends AppCompatActivity {
-    public static final String DT_ACCOUNT_API_KEY = "your-api-key";
 
     @Override
     public void onCreate() {
@@ -139,10 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
 ### 3. Open Dropthought Survey for getting feedback
 
-You can either:
+You can:
 
--   use `Dropthought.startSurveyActivity(Activity activity)` to open the survey that you specified during `Dropthought.init(Application app, String apiKey, String surveyId)`.
--   or, use `Dropthought.startSurveyActivity(Activity activity, String surveyId)` to open the survey with a different survey id.
+-   use `Dropthought.openSurveyActivity(Activity activity, String visibilityId)` to open the survey with a different visibility id.
 
 For example, a button that when users click on, opens the survey,
 
@@ -167,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void takeSurvey() {
-        // You can set metadata before start survey
+ +      // You can set metadata before start survey
         Bundle metadata = new Bundle();
         metadata.putString("name", "User's name");
         metadata.putString("age", "35");
@@ -176,8 +156,9 @@ public class MainActivity extends AppCompatActivity {
     
 +       // This is how you display a survey for the user to take
 +       // Remember: you must supply the activity (e.g. this)
-        Dropthought.startSurveyActivity(
-                this
+        Dropthought.openSurveyActivity(
+                this,
+                "your_visibility-id"
         );
     }
 
@@ -187,9 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
 ### Additional feature: style
 
--   set survey theme: `Dropthought.setTheme("default" | "light" | "dark")`
--   set survey font color: `Dropthought.setFontColor()`
--   set survey background color: `Dropthought.setBackgroundColor()`
 -   set survey metadata: `Dropthought.setSurveyMetadata()`
 
 ### Additional feature: offline mode
