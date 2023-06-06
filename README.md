@@ -2,15 +2,9 @@
 
 This repository contains all Dropthought android SDK sources.
 
-### Before integrate Dropthought SDK
+## Latest version
 
-First, You need to enable to SDK Control Center on Dropthought Enterprise App.
-
-Second, create an application and a visibility. You can assign a program or change style for this visibility. 
-
-Third, copy the visibility ID for SDK integration.
-
-Now you can start to integrate Dropthought SDK
+5.1.0
 
 ## Integrate Dropthought SDK to your project
 
@@ -18,72 +12,47 @@ Now you can start to integrate Dropthought SDK
 
 #### add repository
 
-open the project's `build.gradle` file, add Dropthought's maven repo under `allprojects > repositories`
+open the project's `settings.gradle` file, add Dropthought's maven repo under `repositories`
 
 ```diff
 allprojects {
     repositories {
-+       // Add Dropthought's maven repo
-+       // to repositories
-        maven {
-            url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
-        }
+        // Add Dropthought's maven repo to repositories
++       maven {
++           url "https://dropthought-sdk.s3.amazonaws.com/releases/"
++       }
 
         // ...
         google()
-        jcenter()
 
++       mavenCentral{
++           // We don't want to fetch react-native from Maven Central as there are older versions over there.
++           content {
++               excludeGroup "com.facebook.react"
++           }
++       }
     }
 }
 ```
 
 #### add dependency
 
-open your module's `build.gradle` file, add dropthought sdk dependency:
+open your module's `app/build.gradle` file, add dropthought sdk dependency and handle appcompat:1.3.1:
 
 ```diff
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+// In RN 0.64, TextView might crash without below changes
+-   implementation 'androidx.appcompat:appcompat:1.4.1'
++   implementation ("androidx.appcompat:appcompat:1.3.1") {
++       version {
++           strictly '1.3.1'
++       }
++   }
+    ...
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-+   // add dropthought sdk dependency
-    implementation "com.dropthought.app:dt-sdk:4.2.0"
+    // add dropthought sdk dependency
++   implementation "com.dropthought.app:dt-sdk:5.1.0"
 }
-```
-
-#### set multiDexEnabled to true
-
-open your module's `build.gradle` file, set multiDexEnabled to true
-
-```diff
-android {
-    compileSdkVersion 28
-
-    defaultConfig {
-        //...
-+       multiDexEnabled true
-    }
-}
-```
-
-#### required permission
-
-Please make sure that your setup internet permission `android.permission.INTERNET` in your `AndroidManifest.xml`
-
-```diff
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dropthought.sdk.sampleapp">
-
-+   <!-- make sure you have Internet permission  -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-</manifest>
 ```
 
 ### 2. Dropthought SDK initialization
@@ -95,6 +64,34 @@ package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
++// import dropthought package
+import com.dropthought.app.sdk.Dropthought;
+
+public class MainActivity extends AppCompatActivity {
+    public static final String DT_ACCOUNT_API_KEY = "your-api-key";
+    public static final String DT_SURVEY_ID = "your survey's id";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        setContentView(R.layout.activity_main);
+
+        // call Dropthought.init(Activity, API_KEY) inside onCreate method
+        // Remember: you must supply the activity (e.g. this)
++       Dropthought.init(
++               this,
++               DT_ACCOUNT_API_KEY
++       );
+    }
+}
+```
+
+If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
+
+```diff
+package com.dropthought.sdk.sampleapp;
+
+import androidx.appcompat.app.AppCompatActivity;
 +// import dropthought package
 import com.dropthought.app.sdk.Dropthought;
 
@@ -120,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
 ### 3. Open Dropthought Survey for getting feedback
 
-You can:
-
--   use `Dropthought.openSurveyActivity(Activity activity, String visibilityId)` to open the survey with a different visibility id.
+-   use `Dropthought.openSurveyActivity(Activity activity, String visibilityId)`
 
 For example, a button that when users click on, opens the survey,
 
@@ -147,19 +142,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void takeSurvey() {
- +      // You can set metadata before start survey
-        Bundle metadata = new Bundle();
-        metadata.putString("name", "User's name");
-        metadata.putString("age", "35");
-        metadata.putString("from", "Android");
-        Dropthought.setSurveyMetadata(metadata);
-    
-+       // This is how you display a survey for the user to take
-+       // Remember: you must supply the activity (e.g. this)
-        Dropthought.openSurveyActivity(
-                this,
-                "your_visibility-id"
-        );
+        // This is how you display a survey for the user to take
+        // Remember: you must supply the activity (e.g. this)
++       Dropthought.openSurveyActivity(
++           this,
++           VISIBILITY_ID
++       );
     }
 
     /*...*/
@@ -168,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
 ### Additional feature: style
 
+-   set survey theme: `Dropthought.setAppearance("system" | "light" | "dark")`
+-   set survey font color: `Dropthought.setFontColor()`
+-   set survey background color: `Dropthought.setBackgroundColor()`
 -   set survey metadata: `Dropthought.setSurveyMetadata()`
 
 ### Additional feature: offline mode
