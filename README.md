@@ -1,6 +1,6 @@
 # Dropthought SDK for Android
 
-This repository contains all Dropthought android SDK sources.
+This repository contains all Dropthought Android SDK sources.
 
 ## Latest version
 
@@ -10,7 +10,7 @@ This repository contains all Dropthought android SDK sources.
 
 ### 1. Project setup
 
-#### add repository
+#### - Add repository
 
 open the project's `settings.gradle` file, add Dropthought's maven repo under `repositories`
 
@@ -35,7 +35,7 @@ allprojects {
 }
 ```
 
-#### add dependency
+#### - Add dependency
 
 open your module's `app/build.gradle` file, add dropthought sdk dependency and handle appcompat:1.3.1:
 
@@ -48,6 +48,7 @@ dependencies {
 +           strictly '1.3.1'
 +       }
 +   }
+
     ...
 
     // add dropthought sdk dependency
@@ -55,69 +56,55 @@ dependencies {
 }
 ```
 
+</br>
+</br>
+
 ### 2. Dropthought SDK initialization
 
-calling `Dropthought.init()` inside your `onCreate` method of `MainActivity.java` to initialize Dropthought, for example:
+Call `Dropthought.init()` inside your `onCreate` method of `MainActivity.java` to initialize Dropthought.
+
+For example:
 
 ```diff
 package com.dropthought.sdk.sampleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-+// import dropthought package
-import com.dropthought.app.sdk.Dropthought;
+// import dropthought package
++import com.dropthought.app.sdk.Dropthought;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String DT_ACCOUNT_API_KEY = "your-api-key";
-    public static final String DT_SURVEY_ID = "your survey's id";
+
+    ...
 
     @Override
     public void onCreate() {
         super.onCreate();
         setContentView(R.layout.activity_main);
 
-        // call Dropthought.init(Activity, API_KEY) inside onCreate method
+        // call Dropthought.init(Activity, YOUR_API_KEY) inside onCreate method
         // Remember: you must supply the activity (e.g. this)
 +       Dropthought.init(
 +               this,
-+               DT_ACCOUNT_API_KEY
++               YOUR_API_KEY
 +       );
+
+        ...
+
     }
 }
 ```
 
-If you have multiple surveys in your app, it is OK to initialize Dropthought without the survey id, for example:
+_Note: You can find you API key in the web dashboard. (If you don't have permission, please contact your admin)_
 
-```diff
-package com.dropthought.sdk.sampleapp;
+<img src="https://github.com/DropthoughtSDK/dropthought-ios-sdk/raw/master/imgs/image_apiKey.jpeg">
 
-import androidx.appcompat.app.AppCompatActivity;
-+// import dropthought package
-import com.dropthought.app.sdk.Dropthought;
+</br>
+</br>
 
-public class MainActivity extends AppCompatActivity {
-    public static final String DT_ACCOUNT_API_KEY = "your-api-key";
+### 3. Open Dropthought Survey Screen to collect feedback
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        setContentView(R.layout.activity_main);
-
-+       // call Dropthought.init(Activity, API_KEY) inside onCreate method
-+       // Remember: you must supply the activity (e.g. this)
-        Dropthought.init(
-                this,
-                DT_ACCOUNT_API_KEY
-        );
-    }
-}
-```
-
-**Contact Customer Support at cs@dropthought.com to get help on how to get your api-key and survey-id.**
-
-### 3. Open Dropthought Survey for getting feedback
-
--   use `Dropthought.openSurveyActivity(Activity activity, String visibilityId)`
+`Dropthought.openSurveyActivity(Activity activity, String visibilityId)`
 
 For example, a button that when users click on, opens the survey,
 
@@ -135,37 +122,50 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takeSurvey();
+                // This is how you display a survey for the user to take
+                // Remember: you must supply the activity (e.g. this)
++               Dropthought.openSurveyActivity(
++                   this,
++                   YOUR_VISIBILITY_ID
++               );
             }
         });
     }
 
-
-    public void takeSurvey() {
-        // This is how you display a survey for the user to take
-        // Remember: you must supply the activity (e.g. this)
-+       Dropthought.openSurveyActivity(
-+           this,
-+           VISIBILITY_ID
-+       );
-    }
-
     /*...*/
+
 }
 ```
 
-### Additional feature: style
+_Note: You can find and copy your visibility ID here in Enterprise app_
 
--   set survey theme: `Dropthought.setAppearance("system" | "light" | "dark")`
--   set survey font color: `Dropthought.setFontColor()`
--   set survey background color: `Dropthought.setBackgroundColor()`
--   set survey metadata: `Dropthought.setSurveyMetadata()`
+<img src="https://github.com/DropthoughtSDK/dropthought-ios-sdk/raw/master/imgs/image_visibility.jpeg">
 
-### Additional feature: offline mode
+</br>
+</br>
+
+## Additional features
+
+### - Set Survey Metadata
+
+`Dropthought.setSurveyMetadata(Bundle metadata)`
+
+```java
+Bundle metadata = new Bundle();
+metadata.putString("name", "Barney");
+metadata.putString("age", "36");
+Dropthought.setSurveyMetadata(metadata);
+```
+
+</br>
+
+### - Upload offline feedbacks
 
 When user finishes a survey under no network or a bad network, the survey result is saved offline. Every time when `Dropthought.init` is called, Dropthought SDK would try to upload the saved results(if any) again once.
 
 Or, you could call `Dropthought.uploadOfflineFeedbacks()` manually to try to upload the saved results once if your app has network status monitor.
+</br>
+</br>
 
 ## FAQ
 
