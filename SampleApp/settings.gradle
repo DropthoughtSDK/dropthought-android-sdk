@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven {
-            url "https://dt360-dtp-mobile.s3.us-east-1.amazonaws.com/releases"
+            url "https://dropthought-sdk.s3.amazonaws.com/releases/"
         }
         google()
         mavenCentral {
