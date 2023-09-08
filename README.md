@@ -4,10 +4,11 @@ This repository contains all Dropthought Android SDK sources.
 
 ## Latest version
 
-5.2.0
+5.3.0
 
 ## Features
 
+-   Matrix choice
 -   Multiple open question
 -   Matrix rating
 -   Dropdown
@@ -60,7 +61,7 @@ dependencies {
     ...
 
     // add dropthought sdk dependency
-+   implementation "com.dropthought.app:dt-sdk:5.1.0"
++   implementation "com.dropthought.app:dt-sdk:5.3.0"
 }
 ```
 
