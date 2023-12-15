@@ -4,10 +4,12 @@ This repository contains all Dropthought Android SDK sources.
 
 ## Latest version
 
-5.3.0
+5.6.0
 
 ## Features
 
+-   Bijliride Theme
+-   Picture Choice
 -   Matrix choice
 -   Multiple open question
 -   Matrix rating
@@ -40,6 +42,8 @@ allprojects {
 +               excludeGroup "com.facebook.react"
 +           }
 +       }
+
++       maven { url "https://jitpack.io" }
     }
 }
 ```
@@ -60,8 +64,11 @@ dependencies {
 
     ...
 
+    // need to add this line to for react-native-secure-key-store
++   implementation 'androidx.security:security-crypto:1.0.0-rc03'
+
     // add dropthought sdk dependency
-+   implementation "com.dropthought.app:dt-sdk:5.3.0"
++   implementation "com.dropthought.app:dt-sdk:5.6.0"
 }
 ```
 
