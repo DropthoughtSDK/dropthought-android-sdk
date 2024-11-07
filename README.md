@@ -4,10 +4,14 @@ This repository contains all Dropthought Android SDK sources.
 
 ## Latest version
 
-5.6.0
+- 5.12.0
 
 ## Features
 
+-   Statement
+-   File upload
+-   Poll
+-   Auto Close on End Page
 -   Bijliride Theme
 -   Picture Choice
 -   Matrix choice
@@ -32,17 +36,6 @@ allprojects {
 +       maven {
 +           url "https://dropthought-sdk.s3.amazonaws.com/releases/"
 +       }
-
-        // ...
-        google()
-
-+       mavenCentral{
-+           // We don't want to fetch react-native from Maven Central as there are older versions over there.
-+           content {
-+               excludeGroup "com.facebook.react"
-+           }
-+       }
-
 +       maven { url "https://jitpack.io" }
     }
 }
@@ -54,21 +47,11 @@ open your module's `app/build.gradle` file, add dropthought sdk dependency and h
 
 ```diff
 dependencies {
-// In RN 0.64, TextView might crash without below changes
--   implementation 'androidx.appcompat:appcompat:1.4.1'
-+   implementation ("androidx.appcompat:appcompat:1.3.1") {
-+       version {
-+           strictly '1.3.1'
-+       }
-+   }
-
-    ...
-
     // need to add this line to for react-native-secure-key-store
 +   implementation 'androidx.security:security-crypto:1.0.0-rc03'
 
     // add dropthought sdk dependency
-+   implementation "com.dropthought.app:dt-sdk:5.6.0"
++   implementation "com.dropthought.app:dt-sdk:5.12.0"
 }
 ```
 
